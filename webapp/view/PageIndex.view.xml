@@ -1,0 +1,45 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.sixtDataImport.controller.PageIndex" xmlns:m="sap.m"
+	xmlns:layout="sap.ui.commons.layout">
+	<m:Page showHeader="true" title="Navigation" showFooter="false" showNavButton="false" enableScrolling="false">
+		<m:content>
+			<layout:AbsoluteLayout horizontalScrolling="Hidden" verticalScrolling="Auto">
+				<layout:positions>
+					<layout:PositionContainer left="532px" top="39px">
+						<layout:control>
+							<m:Image src="/webapp/resources/sixt_leasing_logo.png" height="36px" width="217px" densityAware="false"/>
+						</layout:control>
+					</layout:PositionContainer>
+					<layout:PositionContainer left="317px" top="208px">
+						<layout:control>
+							<m:SegmentedButton width="auto" enabled="true" visible="true">
+								<m:items>
+									<m:SegmentedButtonItem icon="sap-icon://add" text="Import new CSV" width="210px" enabled="true" press="_onSegmentedButtonItemPress"/>
+									<m:SegmentedButtonItem icon="sap-icon://vertical-bar-chart" text="Data and Analysis" width="183px" enabled="true"
+										press="_onSegmentedButtonItemPress1"/>
+									<m:SegmentedButtonItem icon="sap-icon://history" text="History" width="114px" enabled="true" press="_onSegmentedButtonItemPress2"/>
+									<m:SegmentedButtonItem icon="sap-icon://process" text="Jobs" width="103px" enabled="true" press="_onSegmentedButtonItemPress3"/>
+									<m:SegmentedButtonItem icon="sap-icon://physical-activity" text="Log Off" width="115px" enabled="true" press="_onSegmentedButtonItemPress4"/>
+								</m:items>
+							</m:SegmentedButton>
+						</layout:control>
+					</layout:PositionContainer>
+				</layout:positions>
+			</layout:AbsoluteLayout>
+		</m:content>
+		<m:footer>
+			<m:Bar design="Auto">
+				<m:contentLeft/>
+				<m:contentMiddle/>
+				<m:contentRight>
+					<m:Button text="Approve" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+					<m:Button text="Reject" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+					<m:Button text="" type="Default" icon="sap-icon://action" iconFirst="true" width="auto" enabled="true" visible="true"
+						iconDensityAware="false"/>
+				</m:contentRight>
+			</m:Bar>
+		</m:footer>
+		<m:headerContent/>
+		<m:subHeader/>
+		<m:customHeader/>
+	</m:Page>
+</mvc:View>

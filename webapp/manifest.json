@@ -1,0 +1,188 @@
+{
+	"_version": "1.1.0",
+	"sap.app": {
+		"_version": "1.2.0",
+		"id": "com.sap.build.standard.sixtDataImport",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+
+			"main": {
+				"uri": "/here/goes/your/serviceUrl/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"ach": "ach",
+		"resources": "resources.json",
+		"sourceTemplate": {
+			"id": "ui5template.basicSAPUI5ApplicationProject",
+			"version": "1.32.0"
+		}
+	},
+	"sap.ui": {
+		"_version": "1.2.0",
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"_version": "1.1.0",
+		"rootView": {
+			"viewName": "generated.app.view.PageResult",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.32.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+
+			"": {
+				"dataSource": "main",
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"loadMetadataAsync": false,
+					"json": true,
+					"bJSON": true,
+					"defaultBindingMode": "TwoWay",
+					"useBatch": true,
+					"refreshAfterChange": false,
+					"disableHeadRequestForToken": true
+				}
+			}
+
+		},
+		"resources": {
+			"css": []
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "com.sap.build.standard.sixtDataImport.view",
+				"controlId": "App",
+				"clearTarget": false,
+				"controlAggregation": "pages",
+				"bypassed": {
+					"target": [
+						"PageIndex"
+					]
+				}
+			},
+			"targets": {
+
+				"PageIndex": {
+					"controlAggregation": "pages",
+					"viewName": "PageIndex",
+					"viewId": "PageIndex",
+					"viewLevel": 1,
+					"transition": "slide"
+				},
+
+				"PageUpload": {
+					"controlAggregation": "pages",
+					"viewName": "PageUpload",
+					"viewId": "PageUpload",
+					"viewLevel": 2,
+					"transition": "flip"
+				},
+
+				"PageAnalyze": {
+					"controlAggregation": "pages",
+					"viewName": "PageAnalyze",
+					"viewId": "PageAnalyze",
+					"viewLevel": 3,
+					"transition": "slide"
+				},
+
+				"PageResult": {
+					"controlAggregation": "pages",
+					"viewName": "PageResult",
+					"viewId": "PageResult",
+					"viewLevel": 4,
+					"transition": "slide"
+				}
+
+			},
+			"routes": [
+
+				{
+					"pattern": "PageIndex/:context:",
+					"name": "PageIndex",
+					"target": [
+						"PageIndex"
+					]
+				},
+
+				{
+					"pattern": "",
+					"name": "default",
+					"target": [
+						"PageIndex"
+					]
+				},
+
+				{
+					"pattern": "PageUpload/:context:",
+					"name": "PageUpload",
+					"target": [
+						"PageUpload"
+					]
+				},
+
+				{
+					"pattern": "PageAnalyze/:context:",
+					"name": "PageAnalyze",
+					"target": [
+						"PageAnalyze"
+					]
+				},
+
+				{
+					"pattern": "PageResult/:context:",
+					"name": "PageResult",
+					"target": [
+						"PageResult"
+					]
+				}
+
+			]
+		}
+	}
+}
