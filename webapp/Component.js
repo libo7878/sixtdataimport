@@ -34,8 +34,8 @@ sap.ui.define([
 
 			// set the dataSource model
 			this.setModel(new sap.ui.model.json.JSONModel({
-				"uri": "\"/here/goes/your/serviceUrl/\""
-			}), "dataSource");
+				"uri": "\"/hana/\""
+			}), "dataSource"); 
 
 			// call the base component's init function
 			UIComponent.prototype.init.apply(this, arguments);

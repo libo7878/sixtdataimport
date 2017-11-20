@@ -21,6 +21,14 @@
 				"entryPath": "/test-resources"
 			},
 			"description": "SAPUI5 Test Resources"
+		},
+		 {
+			"path": "/hana",
+			"target": {
+				"type": "destination",
+				"name": "hana"
+			},
+			"description": "hana"
 		}
 	],
 	"authenticationMethod": "none",

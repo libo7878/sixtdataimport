@@ -8,18 +8,7 @@
 		"applicationVersion": {
 			"version": "1.0.0"
 		},
-		"dataSources": {
-
-			"main": {
-				"uri": "/here/goes/your/serviceUrl/",
-				"type": "OData",
-				"settings": {
-					"odataVersion": "2.0",
-					"localUri": "localService/metadata.xml"
-				}
-			}
-
-		},
+		"dataSources": {},
 		"title": "{{appTitle}}",
 		"description": "{{appDescription}}",
 		"ach": "ach",
@@ -71,22 +60,7 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"uri": "i18n/i18n.properties"
-			},
-
-			"": {
-				"dataSource": "main",
-				"type": "sap.ui.model.odata.v2.ODataModel",
-				"settings": {
-					"loadMetadataAsync": false,
-					"json": true,
-					"bJSON": true,
-					"defaultBindingMode": "TwoWay",
-					"useBatch": true,
-					"refreshAfterChange": false,
-					"disableHeadRequestForToken": true
-				}
 			}
-
 		},
 		"resources": {
 			"css": []
@@ -106,7 +80,6 @@
 				}
 			},
 			"targets": {
-
 				"PageIndex": {
 					"controlAggregation": "pages",
 					"viewName": "PageIndex",
@@ -114,7 +87,6 @@
 					"viewLevel": 1,
 					"transition": "slide"
 				},
-
 				"PageUpload": {
 					"controlAggregation": "pages",
 					"viewName": "PageUpload",
@@ -122,7 +94,6 @@
 					"viewLevel": 2,
 					"transition": "flip"
 				},
-
 				"PageAnalyze": {
 					"controlAggregation": "pages",
 					"viewName": "PageAnalyze",
@@ -130,7 +101,6 @@
 					"viewLevel": 3,
 					"transition": "slide"
 				},
-
 				"PageResult": {
 					"controlAggregation": "pages",
 					"viewName": "PageResult",
@@ -138,10 +108,8 @@
 					"viewLevel": 4,
 					"transition": "slide"
 				}
-
 			},
 			"routes": [
-
 				{
 					"pattern": "PageIndex/:context:",
 					"name": "PageIndex",
@@ -149,7 +117,6 @@
 						"PageIndex"
 					]
 				},
-
 				{
 					"pattern": "",
 					"name": "default",
@@ -157,7 +124,6 @@
 						"PageIndex"
 					]
 				},
-
 				{
 					"pattern": "PageUpload/:context:",
 					"name": "PageUpload",
@@ -165,7 +131,6 @@
 						"PageUpload"
 					]
 				},
-
 				{
 					"pattern": "PageAnalyze/:context:",
 					"name": "PageAnalyze",
@@ -173,7 +138,6 @@
 						"PageAnalyze"
 					]
 				},
-
 				{
 					"pattern": "PageResult/:context:",
 					"name": "PageResult",
@@ -181,8 +145,11 @@
 						"PageResult"
 					]
 				}
-
 			]
 		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
 	}
 }

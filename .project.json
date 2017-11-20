@@ -26,5 +26,10 @@
     "defaultLanguage": "en",
     "defaultI18NPropertyFile": "i18n.properties",
     "resourceModelName": "i18n"
+  },
+  "hcpdeploy": {
+    "account": "p1943042328trial",
+    "name": "sixtdataimport2",
+    "lastVersionWeTriedToDeploy": "1.0.5"
   }
 }

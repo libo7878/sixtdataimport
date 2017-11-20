@@ -1,22 +1,49 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.sixtDataImport.controller.PageAnalyze" xmlns:m="sap.m"
-	xmlns:layout="sap.ui.commons.layout">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:layout="sap.ui.commons.layout" controllerName="com.sap.build.standard.sixtDataImport.controller.PageAnalyze">
 	<m:Page showHeader="true" title="Analyzed uploaded data" showFooter="false" showNavButton="true" enableScrolling="false">
 		<m:content>
 			<layout:AbsoluteLayout horizontalScrolling="Hidden" verticalScrolling="Auto">
 				<layout:positions>
 					<layout:PositionContainer left="948px" top="484px">
 						<layout:control>
-							<m:Button text="Import" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
-								press="_onButtonPress1"/>
+							<m:Button text="Import" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress1"/>
 						</layout:control>
 					</layout:PositionContainer>
 					<layout:PositionContainer left="10px" top="382px">
 						<layout:control>
-							<m:Panel height="148px" width="923.46875px" headerText="Data format 'fuel invoices' accepted" expandable="true" expanded="true"
-								expandAnimation="true" backgroundDesign="Solid">
+							<m:Panel height="148px" width="923.46875px" headerText="Data format 'fuel invoices' accepted" expandable="true" expanded="true" expandAnimation="true" backgroundDesign="Solid">
 								<m:content>
-									<m:Text text="500 records\n0 syntactic errors\n\n Continue with 'import'" width="auto" maxLines="6" wrapping="true" textAlign="Begin"
-										textDirection="Inherit"/>
+									<m:Text text="500 records\n0 syntactic errors\n\n Continue with 'import'" width="auto" maxLines="6" wrapping="true" textAlign="Begin" textDirection="Inherit"/>
+												<m:Table noDataText="Drop column list items here and columns in the area above" id="__table1">
+			    <m:items>
+			        <m:ColumnListItem id="__item2">
+			            <m:cells>
+			                <m:Text text="Row 1 Cell 1" id="__text8"/>
+			                <m:Text text="Row 1 Cell 2" id="__text9"/>
+			                <m:Text text="Row 1 Cell 3" id="__text10"/></m:cells>
+			        </m:ColumnListItem>
+			        <m:ColumnListItem id="__item3">
+			            <m:cells>
+			                <m:Text text="Row 2 Cell 1" id="__text11"/>
+			                <m:Text text="Row 2 Cell 2" id="__text12"/>
+			                <m:Text text="Row 2 Cell 3" id="__text13"/></m:cells>
+			        </m:ColumnListItem></m:items>
+			    <m:columns>
+			        <m:Column id="__column3">
+			            <m:header>
+			                <m:Label text="Header 1" id="__label3"/>
+			            </m:header>
+			        </m:Column>
+			        <m:Column id="__column4">
+			            <m:header>
+			                <m:Label text="Header 2" id="__label4"/>
+			            </m:header>
+			        </m:Column>
+			        <m:Column id="__column5">
+			            <m:header>
+			                <m:Label text="Header 3" id="__label5"/>
+			            </m:header>
+			        </m:Column></m:columns></m:Table>
+
 								</m:content>
 							</m:Panel>
 						</layout:control>
@@ -28,23 +55,19 @@
 					</layout:PositionContainer>
 					<layout:PositionContainer left="944px" top="250px">
 						<layout:control>
-							<m:Button text="Create Mapping" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
-								press="_onButtonPress2"/>
+							<m:Button text="Create Mapping" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress2"/>
 						</layout:control>
 					</layout:PositionContainer>
 					<layout:PositionContainer left="944px" top="197px">
 						<layout:control>
-							<m:Button text="Back to file upload" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
-								press="_onButtonPress3"/>
+							<m:Button text="Back to file upload" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress3"/>
 						</layout:control>
 					</layout:PositionContainer>
 					<layout:PositionContainer left="10px" top="150px">
 						<layout:control>
-							<m:Panel height="153.578125px" width="817.359375px" headerText="Unknown data format" expandable="true" expanded="true"
-								expandAnimation="true" backgroundDesign="Solid">
+							<m:Panel height="153.578125px" width="817.359375px" headerText="Unknown data format" expandable="true" expanded="true" expandAnimation="true" backgroundDesign="Solid">
 								<m:content>
-									<m:Text text="Please create a new mapping to match you fields to our spec or upload a new file." width="auto" maxLines="6" wrapping="true"
-										textAlign="Begin" textDirection="Inherit"/>
+									<m:Text text="Please create a new mapping to match you fields to our spec or upload a new file." width="auto" maxLines="6" wrapping="true" textAlign="Begin" textDirection="Inherit"/>
 								</m:content>
 							</m:Panel>
 						</layout:control>
@@ -59,8 +82,7 @@
 				<m:contentRight>
 					<m:Button text="Approve" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
 					<m:Button text="Reject" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
-					<m:Button text="" type="Default" icon="sap-icon://action" iconFirst="true" width="auto" enabled="true" visible="true"
-						iconDensityAware="false"/>
+					<m:Button text="" type="Default" icon="sap-icon://action" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
 				</m:contentRight>
 			</m:Bar>
 		</m:footer>

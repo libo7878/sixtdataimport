@@ -1,0 +1,40 @@
+{  
+   "status":"success",
+   "slug":"filename,fuel,import",
+   "msg":"successful (imported 50 records)",
+   "feedback":[  
+	   {
+	      "PPPP": "Diesel",
+	      "Kennzeichen": "B - HT 8816",
+	      "Betrag": 83.05,
+	      "Currency": "Euro",
+	      "Datum": "2017-10-24",
+	      "PreisProLiter": 1.62,
+	      "Abgabemenge": 51.27,
+	      "Typ": 1,
+	      "Error": "falsch"
+	   },
+	   {
+	      "Kraftstoff": "Gasoline",
+	      "Kennzeichen": "F - AB 2166",
+	      "Betrag": 304.28,
+	      "Currency": "Euro",
+	      "Datum": "2017-09-11",
+	      "PreisProLiter": 2.27,
+	      "Abgabemenge": 134.04,
+	      "Typ": 1,
+	      "Error": "falsch"
+	   },
+	   {
+	      "Kraftstoff": "Gasoline",
+	      "Kennzeichen": "FS - HU 6477",
+	      "Betrag": 298.13,
+	      "Currency": "Euro",
+	      "Datum": "2017-07-25",
+	      "PreisProLiter": 0.94,
+	      "Abgabemenge": 317.16,
+	      "Typ": 1,
+	      "Error": "falsch"
+	   }
+	]
+}

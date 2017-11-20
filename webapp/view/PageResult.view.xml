@@ -11,7 +11,8 @@
 					</layout:PositionContainer>
 					<layout:PositionContainer left="0px" top="411px">
 						<layout:control>
-							<m:Table width="100%" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
+							<m:Table id="ResultTable" width="100%" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true"
+									items="{path: '/feedback'}">
 								<m:infoToolbar>
 									<m:Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
 										<m:content>
@@ -69,32 +70,25 @@
 										</m:header>
 										<m:footer/>
 									</m:Column>
+									<m:Column width="250px" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+										<m:header>
+											<m:Text text="Error" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+										</m:header>
+										<m:footer/>
+									</m:Column>
 								</m:columns>
 								<m:items>
 									<m:ColumnListItem type="Active">
 										<m:cells>
-											<m:ObjectIdentifier title="" text="Öl" titleActive="false" visible="true"/>
-											<m:Text text="M-AQ1234" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-											<m:ObjectNumber number="77.44" unit="" emphasized="true" state="None"/>
-											<m:Text text="Euro" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-											<m:Text text="2017-11-14" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-											<m:Text text="1.29" width="35.046875px" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-											<m:Text text="60" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-											<m:Text text="1" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-										</m:cells>
-									</m:ColumnListItem>
-									<m:ColumnListItem type="Active">
-										<m:cells>
-											<layout1:HorizontalLayout>
-												<layout1:content/>
-											</layout1:HorizontalLayout>
-											<m:Text text="James Bond" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-											<m:ObjectNumber number="14.99" unit="" emphasized="true" state="None"/>
-											<m:Text text="Euro" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-											<m:Text text="2017-11-14" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-											<m:Text text="" width="35.046875px" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-											<m:Text text="" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
-											<m:Text text="5" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+											<m:ObjectIdentifier title="" text="{Property0}" titleActive="false" visible="true"/>
+											<m:Text text="{Property1}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+											<m:Text text="{Property2}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+											<m:Text text="{Property3}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+											<m:Text text="{Property4}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+											<m:Text text="{Property5}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+											<m:Text text="{Property6}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+											<m:Text text="{Property7}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+											<m:Text text="{Property8}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit"/>
 										</m:cells>
 									</m:ColumnListItem>
 								</m:items>
@@ -111,7 +105,7 @@
 							<m:Panel height="148px" width="923.46875px" headerText="Import of 'fuel invoices' compleded:" expandable="true" expanded="true"
 								expandAnimation="true" backgroundDesign="Solid">
 								<m:content>
-									<m:Text text="498 records imported.\n2 errors found. For details check table below." width="auto" maxLines="6" wrapping="true"
+									<m:Text text="47 records imported.\n3 errors found. For details check table below." width="auto" maxLines="6" wrapping="true"
 										textAlign="Begin" textDirection="Inherit"/>
 								</m:content>
 							</m:Panel>

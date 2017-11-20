@@ -7,7 +7,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 	return BaseController.extend("com.sap.build.standard.sixtDataImport.controller.PageUpload", {
 		handleRouteMatched: function(oEvent) {
-
 			var oParams = {};
 
 			if (oEvent.mParameters.data.context) {
@@ -24,8 +23,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 			this.aRadioButtonGroupIds = ["sap_m_Page_0-content-sap_m_RadioButtonGroup-1510665685280"];
 			this.handleRadioButtonGroupsSelectedIndex();
-
 		},
+		
 		handleRadioButtonGroupsSelectedIndex: function() {
 			// Needed for RadioButtonGroups that have selectedIndex AND buttons bound
 			var that = this;
@@ -41,24 +40,30 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					}
 				}
 			});
-
 		},
-		_onButtonPress: function(oEvent) {
-
-			var oBindingContext = oEvent.getSource().getBindingContext();
-
-			return new Promise(function(fnResolve) {
-
-				this.doNavigate("PageAnalyze", oBindingContext, fnResolve, "");
-			}.bind(this)).catch(function(err) {
-				if (err !== undefined) {
-					MessageBox.error(err.message);
-				}
-			});
-
+		
+		_setFileType: function(oEvent) {
+			var fileType = oEvent.getSource().getId().split('--').pop();
+			this.fileType = fileType;
 		},
+
+		_onStartAnalyze: function(oEvent) {
+			this.method = "analyze";
+			this._startUpload(oEvent);
+		},
+			
+		_onStartImport: function(oEvent) {
+			this.method = "import";
+			this._startUpload(oEvent);
+		},
+			
+		_startUpload: function(oEvent) {
+			var fileUploader = this.getView().byId("fileUploader");
+			fileUploader.setUploadUrl("/hana/com/sixtleasing/fleetintelligence/logic/importer.xsjs?method=" + this.method + "&type=" + this.fileType);
+			fileUploader.upload();
+		},
+
 		doNavigate: function(sRouteName, oBindingContext, fnPromiseResolve, sViaRelation) {
-
 			var sPath = (oBindingContext) ? oBindingContext.getPath() : null;
 			var oModel = (oBindingContext) ? oBindingContext.getModel() : null;
 
@@ -112,119 +117,41 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				fnPromiseResolve();
 			}
 		},
-		_onUploadCollectionUploadComplete: function(oEvent) {
-
-			var oFile = oEvent.getParameter("files")[0];
-			var iStatus = oFile ? oFile.status : 500;
-			var sResponseRaw = oFile ? oFile.responseRaw : "";
-			var oSourceBindingContext = oEvent.getSource().getBindingContext();
-			var sSourceEntityId = oSourceBindingContext ? oSourceBindingContext.getProperty("") : null;
-			var oModel = this.getView().getModel();
-
-			return new Promise(function(fnResolve, fnReject) {
-				if (iStatus !== 200) {
-					fnReject(new Error("Upload failed"));
-				} else if (oModel.hasPendingChanges()) {
-					fnReject(new Error("Please save your changes, first"));
-				} else if (!sSourceEntityId) {
-					fnReject(new Error("No source entity key"));
-				} else {
-					try {
-						var oResponse = JSON.parse(sResponseRaw);
-						var oNewEntityInstance = {};
-
-						oNewEntityInstance[""] = oResponse["ID"];
-						oNewEntityInstance[""] = sSourceEntityId;
-						oModel.createEntry("", {
-							properties: oNewEntityInstance
-						});
-						oModel.submitChanges({
-							success: function(oResponse) {
-								var oChangeResponse = oResponse.__batchResponses[0].__changeResponses[0];
-								if (oChangeResponse && oChangeResponse.response) {
-									oModel.resetChanges();
-									fnReject(new Error(oChangeResponse.message));
-								} else {
-									oModel.refresh();
-									fnResolve();
-								}
-							},
-							error: function(oError) {
-								fnReject(new Error(oError.message));
-							}
-						});
-					} catch (err) {
-						var message = typeof err === "string" ? err : err.message;
-						fnReject(new Error("Error: " + message));
-					}
+		
+		_handleUploadComplete: function(oEvent) {
+			var sResponse = oEvent.getParameter("response").replace(/<(?:.|\n)*?>/gm, '');
+			var oModel = new sap.ui.model.json.JSONModel();
+			oModel.setJSON(sResponse);
+			var data = oModel.getData();
+			var feedback = oModel.getData().feedback;
+			
+			var newFeedback = [];
+			for (var i = 0; i < feedback.length; i++) {
+				var item = {};
+				for (var j = 0; j < feedback[i].length; j++) {
+					item['Property'+j] = feedback[i][j];
 				}
-			}).catch(function(err) {
+				newFeedback.push(item);
+			}
+			
+			oModel.getData().feedback = newFeedback;
+			
+			sap.ui.getCore().setModel(oModel, "globalModel");
+			
+			var oBindingContext = oEvent.getSource().getBindingContext();
+			
+			return new Promise(function(fnResolve) {
+				this.doNavigate("PageResult", oBindingContext, fnResolve, "");
+			}.bind(this)).catch(function(err) {
 				if (err !== undefined) {
 					MessageBox.error(err.message);
 				}
 			});
 
+			
 		},
-		_onUploadCollectionChange: function(oEvent) {
-
-			var oUploadCollection = oEvent.getSource();
-			var aFiles = oEvent.getParameter('files');
-
-			if (aFiles && aFiles.length) {
-				var oFile = aFiles[0];
-				var sFileName = oFile.name;
-
-				var oDataModel = this.getView().getModel();
-				if (oUploadCollection && sFileName && oDataModel) {
-					var sXsrfToken = oDataModel.getSecurityToken();
-					var oCsrfParameter = new sap.m.UploadCollectionParameter({
-						name: "x-csrf-token",
-						value: sXsrfToken
-					});
-					oUploadCollection.addHeaderParameter(oCsrfParameter);
-					var oContentDispositionParameter = new sap.m.UploadCollectionParameter({
-						name: "content-disposition",
-						value: "inline; filename=\"" + encodeURIComponent(sFileName) + "\""
-					});
-					oUploadCollection.addHeaderParameter(oContentDispositionParameter);
-				} else {
-					throw new Error("Not enough information available");
-				}
-			}
-		},
-		_onUploadCollectionTypeMissmatch: function() {
-			return new Promise(function(fnResolve) {
-				sap.m.MessageBox.warning(
-					"The file you are trying to upload does not have an authorized file type (JPEG, JPG, GIF, PNG, TXT, PDF, XLSX, DOCX, PPTX).", {
-						title: "Invalid File Type",
-						onClose: function() {
-							fnResolve();
-						}
-					});
-			}).catch(function(err) {
-				if (err !== undefined) {
-					MessageBox.error(err);
-				}
-			});
-
-		},
-		_onUploadCollectionFileSizeExceed: function() {
-			return new Promise(function(fnResolve) {
-				sap.m.MessageBox.warning("The file you are trying to upload is too large (10MB max).", {
-					title: "File Too Large",
-					onClose: function() {
-						fnResolve();
-					}
-				});
-			}).catch(function(err) {
-				if (err !== undefined) {
-					MessageBox.error(err);
-				}
-			});
-
-		},
+		
 		convertTextToIndexFormatter: function(sTextValue) {
-
 			var oRadioButtonGroup = this.byId("sap_m_Page_0-content-sap_m_RadioButtonGroup-1510665685280");
 			var oButtonsBindingInfo = oRadioButtonGroup.getBindingInfo("buttons");
 			if (oButtonsBindingInfo && oButtonsBindingInfo.binding) {
@@ -240,17 +167,19 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					return oButton.getText() === sTextValue;
 				});
 			}
-
 		},
+		
 		_onRadioButtonGroupSelect: function() {
-
 		},
+		
 		onInit: function() {
-
 			this.mBindingOptions = {};
 			this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			this.oRouter.getTarget("PageUpload").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
-
+			
+			this.fileType = "fuel";
+			this.method = "analyze";
 		}
+
 	});
 }, /* bExport= */ true);

@@ -1,15 +1,9 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.sixtDataImport.controller.PageUpload" xmlns:m="sap.m"
-	xmlns:layout="sap.ui.commons.layout">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns:u="sap.ui.unified" xmlns:layout="sap.ui.commons.layout"
+	controllerName="com.sap.build.standard.sixtDataImport.controller.PageUpload">
 	<m:Page showHeader="true" title="Upload File" showFooter="false" showNavButton="true" enableScrolling="false">
 		<m:content>
 			<layout:AbsoluteLayout horizontalScrolling="Hidden" verticalScrolling="Auto">
 				<layout:positions>
-					<layout:PositionContainer left="498px" top="496px">
-						<layout:control>
-							<m:Button text="Upload" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
-								press="_onButtonPress"/>
-						</layout:control>
-					</layout:PositionContainer>
 					<layout:PositionContainer left="532px" top="39px">
 						<layout:control>
 							<m:Image src="/webapp/resources/sixt_leasing_logo.png" height="36px" width="217px" densityAware="false"/>
@@ -20,16 +14,9 @@
 							<m:Panel height="auto" width="100%" headerText="Select file" expandable="false" expanded="true" expandAnimation="true"
 								backgroundDesign="Solid">
 								<m:content>
-									<m:UploadCollection uploadEnabled="false" numberOfAttachmentsText="" showSeparators="None"
-										noDataText="The UploadCollection coming from BUILD cannot work in WebIDE without additional work" maximumFileSize="10"
-										mimeType="image/jpeg,image/gif,image/png,text/plain,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-										multiple="false" uploadUrl="" sameFilenameAllowed="false" mode="SingleSelectMaster" uploadComplete="_onUploadCollectionUploadComplete"
-										change="_onUploadCollectionChange" typeMissmatch="_onUploadCollectionTypeMissmatch" fileSizeExceed="_onUploadCollectionFileSizeExceed">
-										<m:headerParameters/>
-										<m:items/>
-										<m:parameters/>
-										<m:toolbar/>
-									</m:UploadCollection>
+									<u:FileUploader id="fileUploader" name="myFileUpload" width="400px" 
+										tooltip="Upload your file to the local server"
+										uploadComplete="_handleUploadComplete"/>
 								</m:content>
 							</m:Panel>
 						</layout:control>
@@ -42,13 +29,28 @@
 									<m:RadioButtonGroup id="sap_m_Page_0-content-sap_m_RadioButtonGroup-1510665685280" columns="1" selectedIndex="0" valueState="None"
 										width="428.9375px" editable="true" enabled="true" textDirection="Inherit" select="_onRadioButtonGroupSelect">
 										<m:buttons>
-											<m:RadioButton selected="false" text="Fuel invoice" editable="true" enabled="true" visible="true" width="auto" valueState="None"/>
-											<m:RadioButton selected="false" text="Leasing" editable="true" enabled="true" visible="true" width="auto" valueState="None"/>
-											<m:RadioButton selected="false" text="Repair invoice" editable="true" enabled="true" visible="true" width="auto" valueState="None"/>
+											<m:RadioButton id="fuel" select="_setFileType" selected="false" text="Fuel invoice" editable="true" enabled="true" visible="true"
+												width="auto" valueState="None"/>
+											<m:RadioButton id="leasing" select="_setFileType" selected="false" text="Leasing" editable="true" enabled="true" visible="true" width="auto"
+												valueState="None"/>
+											<m:RadioButton id="repair" select="_setFileType" selected="false" text="Repair invoice" editable="true" enabled="true" visible="true"
+												width="auto" valueState="None"/>
 										</m:buttons>
 									</m:RadioButtonGroup>
 								</m:content>
 							</m:Panel>
+						</layout:control>
+					</layout:PositionContainer>
+					<layout:PositionContainer left="498px" top="496px">
+						<layout:control>
+							<m:Button id="AnalyzeBtn" text="Analyze" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
+								press="_onStartAnalyze"/>
+						</layout:control>
+					</layout:PositionContainer>
+					<layout:PositionContainer left="598px" top="496px">
+						<layout:control>
+							<m:Button id="ImportBtn" text="Import" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"
+								press="_onStartImport"/>
 						</layout:control>
 					</layout:PositionContainer>
 				</layout:positions>
